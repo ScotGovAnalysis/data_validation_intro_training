@@ -1,0 +1,8 @@
+﻿name,description,rule
+column_names_as_expected,Column names are as expected.,"names(.) == c(""walk_id"", ""dog_name"", ""dog_breed"", ""walker"", ""date_of_walk"", ""leash_status"", ""distance_km"", ""duration_min"", ""squirrels_spotted"", ""energy_after"")"
+expected_data_type_character,Character columns are of type character (i.e. text).,is.character(dog_name)
+is_unique,This column has unique values.,is_unique(walk_id)
+is_complete,The id column is complete.,is_complete(walk_id)
+speed_realistic,All dog walks average no more than 15 kilometres per hour.,distance_km / duration_min * 60 < 15
+distance_rex,Rex always walks between 3 and 5 kilometres.,"if (dog_name == ""Rex"") in_range(distance_km, min=3, max=5)"
+expected_walker,The walker column only contains expected values.,"walker %in% code_list[[""walker""]]"

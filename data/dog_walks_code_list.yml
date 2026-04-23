@@ -1,0 +1,30 @@
+dog_breed:
+- Labrador
+- Border Collie
+- Poodle
+- Beagle
+- Mixed
+- Unknown
+
+leash_status:
+- on-lead
+- off-lead
+- mixed
+
+walker:
+- owner
+- dog walker
+- family member
+- unknown
+
+energy_after:
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+- 9
+- 10
