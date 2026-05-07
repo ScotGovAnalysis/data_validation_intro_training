@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -175,13 +155,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./validate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The validate package</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>validate</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -195,8 +175,20 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-challenge" id="toc-the-challenge" class="nav-link active" data-scroll-target="#the-challenge"><span class="header-section-number">1.1</span> The challenge</a></li>
+  <li><a href="#possible-approaches" id="toc-possible-approaches" class="nav-link" data-scroll-target="#possible-approaches"><span class="header-section-number">1.2</span> Possible approaches</a>
+  <ul class="collapse">
+  <li><a href="#write-validation-code-from-scratch" id="toc-write-validation-code-from-scratch" class="nav-link" data-scroll-target="#write-validation-code-from-scratch"><span class="header-section-number">1.2.1</span> Write validation code from scratch</a></li>
+  <li><a href="#incorporate-validation-into-pipes-with-assertr-or-pointblank" id="toc-incorporate-validation-into-pipes-with-assertr-or-pointblank" class="nav-link" data-scroll-target="#incorporate-validation-into-pipes-with-assertr-or-pointblank"><span class="header-section-number">1.2.2</span> Incorporate validation into pipes with <code>assertr</code> or <code>pointblank</code></a></li>
+  </ul></li>
+  <li><a href="#our-chosen-approach-validate" id="toc-our-chosen-approach-validate" class="nav-link" data-scroll-target="#our-chosen-approach-validate"><span class="header-section-number">1.3</span> Our chosen approach: <strong><code>validate</code></strong></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -220,21 +212,126 @@ div.csl-indent {
 </header>
 
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<p>This guide explains how some <a href="https://www.gov.scot/about/how-government-is-run/civil-service/director-general-finance/">Scottish Exchequer</a> analysts automate data validation.</p>
+<section id="the-challenge" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-challenge"><span class="header-section-number">1.1</span> The challenge</h2>
+<p>Our team often needs to check data that has:</p>
+<ul>
+<li>Up to 50 columns and 1,000 rows</li>
+<li>Around 10 to 100 validation rules</li>
+<li>Many contributors who need clear, practical feedback</li>
+<li>Tight deadlines</li>
+</ul>
+<p>We usually work in <strong>R</strong>.</p>
+</section>
+<section id="possible-approaches" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="possible-approaches"><span class="header-section-number">1.2</span> Possible approaches</h2>
+<section id="write-validation-code-from-scratch" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="write-validation-code-from-scratch"><span class="header-section-number">1.2.1</span> Write validation code from scratch</h3>
+<p>One option is to write custom code to flag issues like missing data. Here is an example in VBA:</p>
+<pre class="vba" style="background-color: #f5f5f5; /* light grey*/"><code>'loop through all the data with i and j as indexes for rows and columns respectively.
+'Checking for missing data
+
+For i = 8 To lastRow
+    For j = 1 To lastCol
+        
+        'Check that the cells are not empty, if they are, add a problem.
+        If Len(dataArr(i, j)) = 0 Then
+            Call AddProblem(i, j, "missing_data",
+            "Data from a required field is missing, please complete this cell.")
+        End If       
+    Next j
+Next I</code></pre>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Quick to start</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Rules and error messages are buried in code and hard to maintain</li>
+<li>Requires a lot of code, which increases the risk of mistakes</li>
+<li>Focuses on <em>how</em> to check data, not <em>what</em> the rules are</li>
+<li>Little consistency between different analysts’ solutions</li>
+</ul>
+</section>
+<section id="incorporate-validation-into-pipes-with-assertr-or-pointblank" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="incorporate-validation-into-pipes-with-assertr-or-pointblank"><span class="header-section-number">1.2.2</span> Incorporate validation into pipes with <code>assertr</code> or <code>pointblank</code></h3>
+<p>These packages let you add checks directly into your R pipelines like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>our.data <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verify</span>(mpg <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg.mpg=</span><span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Convenient for small numbers of simple rules</li>
+<li>Can work well with pipes</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Validation rules are still mixed in with other code</li>
+<li>Checks can end up scattered across a project</li>
+<li>Mainly stop bad data flowing through, but don’t summarise how validation performed overall</li>
+</ul>
+<p><code>Pointblank</code> is similar, but there is not yet a stable (v1) CRAN release.</p>
+</section>
+</section>
+<section id="our-chosen-approach-validate" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="our-chosen-approach-validate"><span class="header-section-number">1.3</span> Our chosen approach: <strong><code>validate</code></strong></h2>
+<p>The <code>validate</code> package treats validation rules as data, not code. Rules can be stored in a file (like a CSV), separate from the analysis, for example:</p>
+<table class="caption-top table">
+<caption>rules.csv</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>description</th>
+<th>rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>is_unique_id</td>
+<td>The id column is unique</td>
+<td>is_unique(id)</td>
+</tr>
+<tr class="even">
+<td>is_complete_id</td>
+<td>The id column is complete</td>
+<td>is_complete(id)</td>
+</tr>
+<tr class="odd">
+<td>headcount_plausible</td>
+<td>The headcount is no less than full time equivalent</td>
+<td>headcount &gt;= fte</td>
+</tr>
+</tbody>
+</table>
+<p>Some of the benefits of storing rules as data are:</p>
+<ul>
+<li>Manipulate rule sets easily (e.g.&nbsp;create, read, update, delete)</li>
+<li>Manage rule sets easily (e.g.&nbsp;count, add metadata, reuse or combine rule sets)</li>
+<li>Apply the same rules to multiple datasets without rewriting code</li>
+<li>Track rule changes over time</li>
+<li>Update rules without changing the code</li>
+<li>Easier to explain and agree rules with stakeholders</li>
+<li>Less custom, repetitive code</li>
+<li>Scales well for large or complex rule sets</li>
+<li>Supports any type of rule</li>
+<li>Use validatetools to spot redundancies and problematic rules</li>
+</ul>
+<p>Some of the drawbacks to this approach are:</p>
+<ul>
+<li>It takes time to learn (hence this training document)</li>
+<li>Producing clear validation outputs takes additional effort (explaining what’s wrong, where, and which rules failed)</li>
+<li>Easy mistake: forgetting to add <code>= TRUE</code> to functions that return TRUE/FALSE values</li>
+</ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -664,8 +761,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./validate.html" class="pagination-link" aria-label="The validate package">
-        <span class="nav-page-text">The validate package</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./validate.html" class="pagination-link" aria-label="The `validate` package">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>validate</code> package</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

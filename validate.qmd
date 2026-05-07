@@ -1,33 +1,69 @@
-# The validate package
+# The `validate` package
 
-This is a Quarto book.
+Here is an introductory example of using the `validate` package to validate a data set. We will build on this in future chapters.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+## Essential background reading
 
-```{r}
+Ideally we recommend you read [Data Validation Infrastructure for R](https://www.jstatsoft.org/article/view/v097i10) before proceeding. This paper introduces the `validate` package and covers the essential concepts for the rest of this training.
+
+## An introductory example 🐕
+
+First we load some packages.
+
+```{r message=FALSE}
 # 1. Load the packages ########################################################
 library(readxl)
 library(validate)
 library(yaml)
 library(dplyr)
+library(gt)
+library(jsonlite)
+```
 
+We then read in the data and take a look.
+
+```{r message=FALSE}
 # 2. Load the data, validation rules, and code list ###########################
 ## 2.1 Load the data ----------------------------------------------------------
 dog_walks <- readxl::read_excel(
   path = "data/dog_walks.xlsx",
   sheet = "dog_walks")
 
+gt(dog_walks)
+```
+
+We have a data set of dog walks; including each dog's name and how many squirrels they spotted during their walk.
+
+The rules for this data set are stored in a CSV file. We read these into R using the `validate::validator` function. This creates a validator object.
+
+```{r message=FALSE}
 ## 2.2 Load the validation rules -----------------------------------------------
 rules <- validate::validator(.data = read.csv(file = "data/dog_walks_rules.csv"))
 
 ## 2.3 View the validation rules -----------------------------------------------
-View(as.data.frame(rules))
+gt(as.data.frame(rules))
+
+```
+
+You may notice that some rules refer to `code_list`. These are the valid options for certain columns in the data set. These are defined in a YAML file.
+
+```{r message=FALSE}
 
 ## 2.4 Load the code list ------------------------------------------------------
 code_list <- yaml::yaml.load_file(input = "data/dog_walks_code_list.yml")
 
 ## 2.5 View the code list ------------------------------------------------------
-code_list
+jsonlite::toJSON(code_list, pretty = TRUE)
+
+```
+
+Now we can validate the data by creating a `validation` object.
+
+If you find it helpful, you can think of the `validator` object as an investigator and the `validation` object as the investigator’s report on the dataset it’s validating.
+
+The `summary` function creates a summary of the validation with one row per rule.
+
+```{r message=FALSE}
 
 # 3. Confront the data with the validation rules ##############################
 validation <- validate::confront(
@@ -37,14 +73,26 @@ validation <- validate::confront(
 
 ## 3.1 View a summary of the validation ---------------------------------------
 validation %>% 
-  summary()
+  summary() %>% 
+  gt()
+
+```
+
+We can also view validation results in detail, with one row per check. This produces a very large table. So we filter it to show only where rules have failed or could not be verified.
+
+```{r message=FALSE}
 
 ## 3.2 View the results of the validation -------------------------------------
 validation %>% 
-  as.data.frame()
-
-## 3.3 View all errors found --------------------------------------------------
-validation %>% 
   as.data.frame() %>% 
-  filter(value == FALSE)
+  filter(value == FALSE | is.na(value)) %>%
+  arrange(value) %>%
+  gt()
 ```
+
+Validation is now complete, but at this point only R users can see the results.
+
+The next step is to turn these results into clear, practical feedback to help data providers resolve any issues. We do this by creating two outputs:
+
+-   A validation log
+-   Validation cell highlighting

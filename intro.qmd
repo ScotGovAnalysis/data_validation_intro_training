@@ -1,9 +1,102 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+This guide explains how some [Scottish Exchequer](https://www.gov.scot/about/how-government-is-run/civil-service/director-general-finance/) analysts automate data validation.
 
-See @knuth84 for additional discussion of literate programming.
+## The challenge
 
-```{r}
-1 + 1
+Our team often needs to check data that has:
+
+-   Up to 50 columns and 1,000 rows
+-   Around 10 to 100 validation rules
+-   Many contributors who need clear, practical feedback
+-   Tight deadlines
+
+We usually work in **R**.
+
+## Possible approaches
+
+### Write validation code from scratch
+
+One option is to write custom code to flag issues like missing data. Here is an example in VBA:
+
+``` {.vba style="background-color: #f5f5f5; /* light grey*/"}
+'loop through all the data with i and j as indexes for rows and columns respectively.
+'Checking for missing data
+
+For i = 8 To lastRow
+    For j = 1 To lastCol
+        
+        'Check that the cells are not empty, if they are, add a problem.
+        If Len(dataArr(i, j)) = 0 Then
+            Call AddProblem(i, j, "missing_data",
+            "Data from a required field is missing, please complete this cell.")
+        End If       
+    Next j
+Next I
 ```
+
+**Pros**
+
+-   Quick to start
+
+**Cons**
+
+-   Rules and error messages are buried in code and hard to maintain
+-   Requires a lot of code, which increases the risk of mistakes
+-   Focuses on *how* to check data, not *what* the rules are
+-   Little consistency between different analysts’ solutions
+
+### Incorporate validation into pipes with `assertr` or `pointblank`
+
+These packages let you add checks directly into your R pipelines like this:
+
+``` r
+our.data %>%
+  verify(mpg >= 0) %>%
+  group_by(cyl) %>%
+  summarise(avg.mpg=mean(mpg))
+```
+
+**Pros**
+
+-   Convenient for small numbers of simple rules
+-   Can work well with pipes
+
+**Cons**
+
+-   Validation rules are still mixed in with other code
+-   Checks can end up scattered across a project
+-   Mainly stop bad data flowing through, but don’t summarise how validation performed overall
+
+`Pointblank` is similar, but there is not yet a stable (v1) CRAN release.
+
+## Our chosen approach: **`validate`**
+
+The `validate` package treats validation rules as data, not code. Rules can be stored in a file (like a CSV), separate from the analysis, for example:
+
+| name | description | rule |
+|------------------------|------------------------|------------------------|
+| is_unique_id | The id column is unique | is_unique(id) |
+| is_complete_id | The id column is complete | is_complete(id) |
+| headcount_plausible | The headcount is no less than full time equivalent | headcount \>= fte |
+
+: rules.csv
+
+Some of the benefits of storing rules as data are:
+
+-   Manipulate rule sets easily (e.g. create, read, update, delete)
+-   Manage rule sets easily (e.g. count, add metadata, reuse or combine rule sets)
+-   Apply the same rules to multiple datasets without rewriting code
+-   Track rule changes over time
+-   Update rules without changing the code
+-   Easier to explain and agree rules with stakeholders
+-   Less custom, repetitive code
+-   Scales well for large or complex rule sets
+-   Supports any type of rule
+-   Use validatetools to spot redundancies and problematic rules
+
+Some of the drawbacks to this approach are:
+
+-   It takes time to learn (hence this training document)
+-   Producing clear validation outputs takes additional effort (explaining what’s wrong, where, and which rules failed)
+-   Easy mistake: forgetting to add `= TRUE` to functions that return TRUE/FALSE values

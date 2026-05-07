@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The validate package – Data Validation Introductory Training</title>
+<title>2&nbsp; The validate package – Data Validation Introductory Training</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./validate.html">The validate package</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./validate.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>validate</code> package</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,13 +155,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./validate.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">The validate package</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>validate</code> package</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -175,15 +175,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#essential-background-reading" id="toc-essential-background-reading" class="nav-link active" data-scroll-target="#essential-background-reading"><span class="header-section-number">2.1</span> Essential background reading</a></li>
+  <li><a href="#an-introductory-example" id="toc-an-introductory-example" class="nav-link" data-scroll-target="#an-introductory-example"><span class="header-section-number">2.2</span> An introductory example 🐕</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The validate package</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The <code>validate</code> package</span></h1>
 </div>
 
 
@@ -200,263 +207,2865 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is a Quarto book.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
+<p>Here is an introductory example of using the <code>validate</code> package to validate a data set. We will build on this in future chapters.</p>
+<section id="essential-background-reading" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="essential-background-reading"><span class="header-section-number">2.1</span> Essential background reading</h2>
+<p>Ideally we recommend you read <a href="https://www.jstatsoft.org/article/view/v097i10">Data Validation Infrastructure for R</a> before proceeding. This paper introduces the <code>validate</code> package and covers the essential concepts for the rest of this training.</p>
+</section>
+<section id="an-introductory-example" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="an-introductory-example"><span class="header-section-number">2.2</span> An introductory example 🐕</h2>
+<p>First we load some packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load the packages ########################################################</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(validate)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:validate':
+<p>We then read in the data and take a look.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load the data, validation rules, and code list ###########################</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.1 Load the data ----------------------------------------------------------</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dog_walks <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/dog_walks.xlsx"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"dog_walks"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(dog_walks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ppoigefudy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ppoigefudy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    expr</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
+#ppoigefudy thead, #ppoigefudy tbody, #ppoigefudy tfoot, #ppoigefudy tr, #ppoigefudy td, #ppoigefudy th {
+  border-style: none;
+}
 
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
+#ppoigefudy p {
+  margin: 0;
+  padding: 0;
+}
 
-    intersect, setdiff, setequal, union</code></pre>
+#ppoigefudy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ppoigefudy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ppoigefudy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ppoigefudy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ppoigefudy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ppoigefudy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ppoigefudy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ppoigefudy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ppoigefudy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ppoigefudy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ppoigefudy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ppoigefudy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ppoigefudy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ppoigefudy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ppoigefudy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ppoigefudy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ppoigefudy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ppoigefudy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ppoigefudy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ppoigefudy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ppoigefudy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ppoigefudy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ppoigefudy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ppoigefudy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ppoigefudy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ppoigefudy .gt_left {
+  text-align: left;
+}
+
+#ppoigefudy .gt_center {
+  text-align: center;
+}
+
+#ppoigefudy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ppoigefudy .gt_font_normal {
+  font-weight: normal;
+}
+
+#ppoigefudy .gt_font_bold {
+  font-weight: bold;
+}
+
+#ppoigefudy .gt_font_italic {
+  font-style: italic;
+}
+
+#ppoigefudy .gt_super {
+  font-size: 65%;
+}
+
+#ppoigefudy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ppoigefudy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ppoigefudy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ppoigefudy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ppoigefudy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ppoigefudy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ppoigefudy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ppoigefudy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ppoigefudy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="walk_id" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">walk_id</th>
+<th id="dog_name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">dog_name</th>
+<th id="dog_bread" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">dog_bread</th>
+<th id="walker" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">walker</th>
+<th id="date_of_walk" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">date_of_walk</th>
+<th id="distance_km" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">distance_km</th>
+<th id="duration_min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">duration_min</th>
+<th id="squirrels_spotted" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">squirrels_spotted</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">1</td>
+<td class="gt_row gt_left" headers="dog_name">Rex</td>
+<td class="gt_row gt_left" headers="dog_bread">Labrador</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-20</td>
+<td class="gt_row gt_right" headers="distance_km">3.2</td>
+<td class="gt_row gt_right" headers="duration_min">45</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">2</td>
+<td class="gt_row gt_left" headers="dog_name">Bella</td>
+<td class="gt_row gt_left" headers="dog_bread">Border Collie</td>
+<td class="gt_row gt_left" headers="walker">dog walker</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-20</td>
+<td class="gt_row gt_right" headers="distance_km">1.5</td>
+<td class="gt_row gt_right" headers="duration_min">30</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">3</td>
+<td class="gt_row gt_left" headers="dog_name">Max</td>
+<td class="gt_row gt_left" headers="dog_bread">Poodle</td>
+<td class="gt_row gt_left" headers="walker">family member</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-20</td>
+<td class="gt_row gt_right" headers="distance_km">10.0</td>
+<td class="gt_row gt_right" headers="duration_min">5</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">4</td>
+<td class="gt_row gt_left" headers="dog_name">Luna</td>
+<td class="gt_row gt_left" headers="dog_bread">Beagle</td>
+<td class="gt_row gt_left" headers="walker">unknown</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-20</td>
+<td class="gt_row gt_right" headers="distance_km">2.8</td>
+<td class="gt_row gt_right" headers="duration_min">40</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">3</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">5</td>
+<td class="gt_row gt_left" headers="dog_name">Charlie</td>
+<td class="gt_row gt_left" headers="dog_bread">Mixed</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-21</td>
+<td class="gt_row gt_right" headers="distance_km">-1.0</td>
+<td class="gt_row gt_right" headers="duration_min">25</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">6</td>
+<td class="gt_row gt_left" headers="dog_name">Daisy</td>
+<td class="gt_row gt_left" headers="dog_bread">Unknown</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-21</td>
+<td class="gt_row gt_right" headers="distance_km">4.0</td>
+<td class="gt_row gt_right" headers="duration_min">NA</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">7</td>
+<td class="gt_row gt_left" headers="dog_name">Milo</td>
+<td class="gt_row gt_left" headers="dog_bread">Labrador</td>
+<td class="gt_row gt_left" headers="walker">dog walker</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-21</td>
+<td class="gt_row gt_right" headers="distance_km">2.2</td>
+<td class="gt_row gt_right" headers="duration_min">35</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">999</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">8</td>
+<td class="gt_row gt_left" headers="dog_name">123</td>
+<td class="gt_row gt_left" headers="dog_bread">Poodle</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-21</td>
+<td class="gt_row gt_right" headers="distance_km">3.5</td>
+<td class="gt_row gt_right" headers="duration_min">50</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">NA</td>
+<td class="gt_row gt_left" headers="dog_name">Coco</td>
+<td class="gt_row gt_left" headers="dog_bread">Border Collie</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-22</td>
+<td class="gt_row gt_right" headers="distance_km">2.0</td>
+<td class="gt_row gt_right" headers="duration_min">30</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">10</td>
+<td class="gt_row gt_left" headers="dog_name">Buddy</td>
+<td class="gt_row gt_left" headers="dog_bread">Labrador</td>
+<td class="gt_row gt_left" headers="walker">family member</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-22</td>
+<td class="gt_row gt_right" headers="distance_km">5.5</td>
+<td class="gt_row gt_right" headers="duration_min">60</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="dog_name">Rex</td>
+<td class="gt_row gt_left" headers="dog_bread">Labrador</td>
+<td class="gt_row gt_left" headers="walker">owner</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-22</td>
+<td class="gt_row gt_right" headers="distance_km">3.0</td>
+<td class="gt_row gt_right" headers="duration_min">45</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="dog_name">Bella</td>
+<td class="gt_row gt_left" headers="dog_bread">Border Collie</td>
+<td class="gt_row gt_left" headers="walker">family member</td>
+<td class="gt_row gt_right" headers="date_of_walk">2026-04-22</td>
+<td class="gt_row gt_right" headers="distance_km">1.7</td>
+<td class="gt_row gt_right" headers="duration_min">32</td>
+<td class="gt_row gt_right" headers="squirrels_spotted">2</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load the data, validation rules, and code list ###########################</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.1 Load the data ----------------------------------------------------------</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dog_walks <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/dog_walks.xlsx"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"dog_walks"</span>)</span>
+</div>
+</div>
+<p>We have a data set of dog walks; including each dog’s name and how many squirrels they spotted during their walk.</p>
+<p>The rules for this data set are stored in a CSV file. We read these into R using the <code>validate::validator</code> function. This creates a validator object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.2 Load the validation rules -----------------------------------------------</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rules <span class="ot">&lt;-</span> validate<span class="sc">::</span><span class="fu">validator</span>(<span class="at">.data =</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data/dog_walks_rules.csv"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.3 View the validation rules -----------------------------------------------</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(<span class="fu">as.data.frame</span>(rules))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="yxngtmgrwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yxngtmgrwj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yxngtmgrwj thead, #yxngtmgrwj tbody, #yxngtmgrwj tfoot, #yxngtmgrwj tr, #yxngtmgrwj td, #yxngtmgrwj th {
+  border-style: none;
+}
+
+#yxngtmgrwj p {
+  margin: 0;
+  padding: 0;
+}
+
+#yxngtmgrwj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yxngtmgrwj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yxngtmgrwj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yxngtmgrwj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yxngtmgrwj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yxngtmgrwj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yxngtmgrwj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yxngtmgrwj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yxngtmgrwj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yxngtmgrwj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yxngtmgrwj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yxngtmgrwj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yxngtmgrwj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yxngtmgrwj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yxngtmgrwj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxngtmgrwj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yxngtmgrwj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yxngtmgrwj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yxngtmgrwj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxngtmgrwj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yxngtmgrwj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxngtmgrwj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yxngtmgrwj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxngtmgrwj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yxngtmgrwj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxngtmgrwj .gt_left {
+  text-align: left;
+}
+
+#yxngtmgrwj .gt_center {
+  text-align: center;
+}
+
+#yxngtmgrwj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yxngtmgrwj .gt_font_normal {
+  font-weight: normal;
+}
+
+#yxngtmgrwj .gt_font_bold {
+  font-weight: bold;
+}
+
+#yxngtmgrwj .gt_font_italic {
+  font-style: italic;
+}
+
+#yxngtmgrwj .gt_super {
+  font-size: 65%;
+}
+
+#yxngtmgrwj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yxngtmgrwj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yxngtmgrwj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yxngtmgrwj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yxngtmgrwj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yxngtmgrwj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yxngtmgrwj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yxngtmgrwj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yxngtmgrwj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">label</th>
+<th id="description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">description</th>
+<th id="origin" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">origin</th>
+<th id="created" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">created</th>
+<th id="language" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">language</th>
+<th id="severity" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">severity</th>
+<th id="rule" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">rule</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">column_names_as_expected</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">Column names are as expected.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "distance_km", "duration_min", "squirrels_spotted")</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">expected_data_type_character</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">Character columns are of type character (i.e. text).</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">is.character(dog_name)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">This column has unique values.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">is_unique(walk_id)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">is_complete_id</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">The id column is complete.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">is_complete(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">realistic_distance</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">All distances are positive</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">distance_km - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">realistic_duration</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">All durations are positive</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">duration_min - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">All durations are positive</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">realistic_speed</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">All dog walks average no more than 15 kilometres per hour.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">distance_km/duration_min * 60 &lt; 15</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">distance_rex</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">Rex always walks between 3 and 5 kilometres.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">expected_walker</td>
+<td class="gt_row gt_right" headers="label"></td>
+<td class="gt_row gt_left" headers="description">The walker column only contains expected values.</td>
+<td class="gt_row gt_right" headers="origin"></td>
+<td class="gt_row gt_right" headers="created">2026-05-07 10:49:58.48802</td>
+<td class="gt_row gt_left" headers="language">validate 1.1.7</td>
+<td class="gt_row gt_left" headers="severity">error</td>
+<td class="gt_row gt_left" headers="rule">walker %vin% code_list[["walker"]]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>You may notice that some rules refer to <code>code_list</code>. These are the valid options for certain columns in the data set. These are defined in a YAML file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.4 Load the code list ------------------------------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>code_list <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">yaml.load_file</span>(<span class="at">input =</span> <span class="st">"data/dog_walks_code_list.yml"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.5 View the code list ------------------------------------------------------</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>jsonlite<span class="sc">::</span><span class="fu">toJSON</span>(code_list, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "dog_breed": ["Labrador", "Border Collie", "Poodle", "Beagle", "Mixed", "Unknown"],
+  "walker": ["owner", "dog walker", "family member", "unknown"]
+} </code></pre>
+</div>
+</div>
+<p>Now we can validate the data by creating a <code>validation</code> object.</p>
+<p>If you find it helpful, you can think of the <code>validator</code> object as an investigator and the <code>validation</code> object as the investigator’s report on the dataset it’s validating.</p>
+<p>The <code>summary</code> function creates a summary of the validation with one row per rule.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Confront the data with the validation rules ##############################</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>validation <span class="ot">&lt;-</span> validate<span class="sc">::</span><span class="fu">confront</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat =</span> dog_walks</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  , <span class="at">x =</span> rules</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  , <span class="at">key =</span> <span class="st">"walk_id"</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.2 Load the validation rules -----------------------------------------------</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>rules <span class="ot">&lt;-</span> validate<span class="sc">::</span><span class="fu">validator</span>(<span class="at">.data =</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data/dog_walks_rules.csv"</span>))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.3 View the validation rules -----------------------------------------------</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(<span class="fu">as.data.frame</span>(rules))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.4 Load the code list ------------------------------------------------------</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>code_list <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">yaml.load_file</span>(<span class="at">input =</span> <span class="st">"data/dog_walks_code_list.yml"</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.5 View the code list ------------------------------------------------------</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>code_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$dog_breed
-[1] "Labrador"      "Border Collie" "Poodle"        "Beagle"       
-[5] "Mixed"         "Unknown"      
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.1 View a summary of the validation ---------------------------------------</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="cbvsklouec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cbvsklouec table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-$leash_status
-[1] "on-lead"  "off-lead" "mixed"   
+#cbvsklouec thead, #cbvsklouec tbody, #cbvsklouec tfoot, #cbvsklouec tr, #cbvsklouec td, #cbvsklouec th {
+  border-style: none;
+}
 
-$walker
-[1] "owner"         "dog walker"    "family member" "unknown"      
+#cbvsklouec p {
+  margin: 0;
+  padding: 0;
+}
 
-$energy_after
- [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+#cbvsklouec .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cbvsklouec .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cbvsklouec .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cbvsklouec .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cbvsklouec .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cbvsklouec .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cbvsklouec .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cbvsklouec .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cbvsklouec .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cbvsklouec .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cbvsklouec .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cbvsklouec .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cbvsklouec .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cbvsklouec .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cbvsklouec .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbvsklouec .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cbvsklouec .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cbvsklouec .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cbvsklouec .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbvsklouec .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cbvsklouec .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbvsklouec .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cbvsklouec .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbvsklouec .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cbvsklouec .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbvsklouec .gt_left {
+  text-align: left;
+}
+
+#cbvsklouec .gt_center {
+  text-align: center;
+}
+
+#cbvsklouec .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cbvsklouec .gt_font_normal {
+  font-weight: normal;
+}
+
+#cbvsklouec .gt_font_bold {
+  font-weight: bold;
+}
+
+#cbvsklouec .gt_font_italic {
+  font-style: italic;
+}
+
+#cbvsklouec .gt_super {
+  font-size: 65%;
+}
+
+#cbvsklouec .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cbvsklouec .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cbvsklouec .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cbvsklouec .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cbvsklouec .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cbvsklouec .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cbvsklouec .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cbvsklouec .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cbvsklouec div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="items" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">items</th>
+<th id="passes" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">passes</th>
+<th id="fails" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">fails</th>
+<th id="nNA" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">nNA</th>
+<th id="error" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">error</th>
+<th id="warning" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">warning</th>
+<th id="expression" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">expression</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">column_names_as_expected</td>
+<td class="gt_row gt_right" headers="items">8</td>
+<td class="gt_row gt_right" headers="passes">7</td>
+<td class="gt_row gt_right" headers="fails">1</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "distance_km", "duration_min", "squirrels_spotted")</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">expected_data_type_character</td>
+<td class="gt_row gt_right" headers="items">1</td>
+<td class="gt_row gt_right" headers="passes">1</td>
+<td class="gt_row gt_right" headers="fails">0</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is.character(dog_name)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">10</td>
+<td class="gt_row gt_right" headers="fails">2</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_unique(walk_id)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">is_complete_id</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">11</td>
+<td class="gt_row gt_right" headers="fails">1</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_complete(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">realistic_distance</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">11</td>
+<td class="gt_row gt_right" headers="fails">1</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">realistic_duration</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">11</td>
+<td class="gt_row gt_right" headers="fails">0</td>
+<td class="gt_row gt_right" headers="nNA">1</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">duration_min - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">9</td>
+<td class="gt_row gt_right" headers="fails">2</td>
+<td class="gt_row gt_right" headers="nNA">1</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">realistic_speed</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">10</td>
+<td class="gt_row gt_right" headers="fails">1</td>
+<td class="gt_row gt_right" headers="nNA">1</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km/duration_min * 60 &lt; 15</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="name">distance_rex</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">12</td>
+<td class="gt_row gt_right" headers="fails">0</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="name">expected_walker</td>
+<td class="gt_row gt_right" headers="items">12</td>
+<td class="gt_row gt_right" headers="passes">12</td>
+<td class="gt_row gt_right" headers="fails">0</td>
+<td class="gt_row gt_right" headers="nNA">0</td>
+<td class="gt_row gt_center" headers="error">FALSE</td>
+<td class="gt_row gt_center" headers="warning">FALSE</td>
+<td class="gt_row gt_left" headers="expression">walker %vin% code_list[["walker"]]</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Confront the data with the validation rules ##############################</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>validation <span class="ot">&lt;-</span> validate<span class="sc">::</span><span class="fu">confront</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat =</span> dog_walks</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  , <span class="at">x =</span> rules</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  , <span class="at">key =</span> <span class="st">"walk_id"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.1 View a summary of the validation ---------------------------------------</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                          name items passes fails nNA error warning
-1     column_names_as_expected    10      5     5   0 FALSE    TRUE
-2 expected_data_type_character     1      1     0   0 FALSE   FALSE
-3                    is_unique    12     12     0   0 FALSE   FALSE
-4                  is_complete    12     12     0   0 FALSE   FALSE
-5              speed_realistic    12     10     1   1 FALSE   FALSE
-6                 distance_rex    12     12     0   0 FALSE   FALSE
-7              expected_walker    12     12     0   0 FALSE   FALSE
-                                                                                                                                                       expression
-1 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-2                                                                                                                                          is.character(dog_name)
-3                                                                                                                                              is_unique(walk_id)
-4                                                                                                                                            is_complete(walk_id)
-5                                                                                                                              distance_km/duration_min * 60 &lt; 15
-6                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-7                                                                                                                              walker %vin% code_list[["walker"]]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.2 View the results of the validation -------------------------------------</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   walk_id                         name value
-1       NA     column_names_as_expected  TRUE
-2       NA     column_names_as_expected  TRUE
-3       NA     column_names_as_expected  TRUE
-4       NA     column_names_as_expected  TRUE
-5       NA     column_names_as_expected  TRUE
-6       NA     column_names_as_expected FALSE
-7       NA     column_names_as_expected FALSE
-8       NA     column_names_as_expected FALSE
-9       NA     column_names_as_expected FALSE
-10      NA     column_names_as_expected FALSE
-11      NA expected_data_type_character  TRUE
-12       1                    is_unique  TRUE
-13       2                    is_unique  TRUE
-14       3                    is_unique  TRUE
-15       4                    is_unique  TRUE
-16       5                    is_unique  TRUE
-17       6                    is_unique  TRUE
-18       7                    is_unique  TRUE
-19       8                    is_unique  TRUE
-20       9                    is_unique  TRUE
-21      10                    is_unique  TRUE
-22      11                    is_unique  TRUE
-23      12                    is_unique  TRUE
-24       1                  is_complete  TRUE
-25       2                  is_complete  TRUE
-26       3                  is_complete  TRUE
-27       4                  is_complete  TRUE
-28       5                  is_complete  TRUE
-29       6                  is_complete  TRUE
-30       7                  is_complete  TRUE
-31       8                  is_complete  TRUE
-32       9                  is_complete  TRUE
-33      10                  is_complete  TRUE
-34      11                  is_complete  TRUE
-35      12                  is_complete  TRUE
-36       1              speed_realistic  TRUE
-37       2              speed_realistic  TRUE
-38       3              speed_realistic FALSE
-39       4              speed_realistic  TRUE
-40       5              speed_realistic  TRUE
-41       6              speed_realistic    NA
-42       7              speed_realistic  TRUE
-43       8              speed_realistic  TRUE
-44       9              speed_realistic  TRUE
-45      10              speed_realistic  TRUE
-46      11              speed_realistic  TRUE
-47      12              speed_realistic  TRUE
-48       1                 distance_rex  TRUE
-49       2                 distance_rex  TRUE
-50       3                 distance_rex  TRUE
-51       4                 distance_rex  TRUE
-52       5                 distance_rex  TRUE
-53       6                 distance_rex  TRUE
-54       7                 distance_rex  TRUE
-55       8                 distance_rex  TRUE
-56       9                 distance_rex  TRUE
-57      10                 distance_rex  TRUE
-58      11                 distance_rex  TRUE
-59      12                 distance_rex  TRUE
-60       1              expected_walker  TRUE
-61       2              expected_walker  TRUE
-62       3              expected_walker  TRUE
-63       4              expected_walker  TRUE
-64       5              expected_walker  TRUE
-65       6              expected_walker  TRUE
-66       7              expected_walker  TRUE
-67       8              expected_walker  TRUE
-68       9              expected_walker  TRUE
-69      10              expected_walker  TRUE
-70      11              expected_walker  TRUE
-71      12              expected_walker  TRUE
-                                                                                                                                                        expression
-1  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-2  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-3  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-4  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-5  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-6  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-7  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-8  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-9  names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-10 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-11                                                                                                                                          is.character(dog_name)
-12                                                                                                                                              is_unique(walk_id)
-13                                                                                                                                              is_unique(walk_id)
-14                                                                                                                                              is_unique(walk_id)
-15                                                                                                                                              is_unique(walk_id)
-16                                                                                                                                              is_unique(walk_id)
-17                                                                                                                                              is_unique(walk_id)
-18                                                                                                                                              is_unique(walk_id)
-19                                                                                                                                              is_unique(walk_id)
-20                                                                                                                                              is_unique(walk_id)
-21                                                                                                                                              is_unique(walk_id)
-22                                                                                                                                              is_unique(walk_id)
-23                                                                                                                                              is_unique(walk_id)
-24                                                                                                                                            is_complete(walk_id)
-25                                                                                                                                            is_complete(walk_id)
-26                                                                                                                                            is_complete(walk_id)
-27                                                                                                                                            is_complete(walk_id)
-28                                                                                                                                            is_complete(walk_id)
-29                                                                                                                                            is_complete(walk_id)
-30                                                                                                                                            is_complete(walk_id)
-31                                                                                                                                            is_complete(walk_id)
-32                                                                                                                                            is_complete(walk_id)
-33                                                                                                                                            is_complete(walk_id)
-34                                                                                                                                            is_complete(walk_id)
-35                                                                                                                                            is_complete(walk_id)
-36                                                                                                                              distance_km/duration_min * 60 &lt; 15
-37                                                                                                                              distance_km/duration_min * 60 &lt; 15
-38                                                                                                                              distance_km/duration_min * 60 &lt; 15
-39                                                                                                                              distance_km/duration_min * 60 &lt; 15
-40                                                                                                                              distance_km/duration_min * 60 &lt; 15
-41                                                                                                                              distance_km/duration_min * 60 &lt; 15
-42                                                                                                                              distance_km/duration_min * 60 &lt; 15
-43                                                                                                                              distance_km/duration_min * 60 &lt; 15
-44                                                                                                                              distance_km/duration_min * 60 &lt; 15
-45                                                                                                                              distance_km/duration_min * 60 &lt; 15
-46                                                                                                                              distance_km/duration_min * 60 &lt; 15
-47                                                                                                                              distance_km/duration_min * 60 &lt; 15
-48                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-49                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-50                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-51                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-52                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-53                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-54                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-55                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-56                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-57                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-58                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-59                                                                                                   dog_name != "Rex" | (in_range(distance_km, min = 3, max = 5))
-60                                                                                                                              walker %vin% code_list[["walker"]]
-61                                                                                                                              walker %vin% code_list[["walker"]]
-62                                                                                                                              walker %vin% code_list[["walker"]]
-63                                                                                                                              walker %vin% code_list[["walker"]]
-64                                                                                                                              walker %vin% code_list[["walker"]]
-65                                                                                                                              walker %vin% code_list[["walker"]]
-66                                                                                                                              walker %vin% code_list[["walker"]]
-67                                                                                                                              walker %vin% code_list[["walker"]]
-68                                                                                                                              walker %vin% code_list[["walker"]]
-69                                                                                                                              walker %vin% code_list[["walker"]]
-70                                                                                                                              walker %vin% code_list[["walker"]]
-71                                                                                                                              walker %vin% code_list[["walker"]]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.3 View all errors found --------------------------------------------------</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  walk_id                     name value
-1      NA column_names_as_expected FALSE
-2      NA column_names_as_expected FALSE
-3      NA column_names_as_expected FALSE
-4      NA column_names_as_expected FALSE
-5      NA column_names_as_expected FALSE
-6       3          speed_realistic FALSE
-                                                                                                                                                       expression
-1 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-2 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-3 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-4 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-5 names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "leash_status", "distance_km", "duration_min", "squirrels_spotted", "energy_after")
-6                                                                                                                              distance_km/duration_min * 60 &lt; 15</code></pre>
 </div>
 </div>
+<p>We can also view validation results in detail, with one row per check. This produces a very large table. So we filter it to show only where rules have failed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.2 View the results of the validation -------------------------------------</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">==</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="kpnhwvwofo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kpnhwvwofo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kpnhwvwofo thead, #kpnhwvwofo tbody, #kpnhwvwofo tfoot, #kpnhwvwofo tr, #kpnhwvwofo td, #kpnhwvwofo th {
+  border-style: none;
+}
+
+#kpnhwvwofo p {
+  margin: 0;
+  padding: 0;
+}
+
+#kpnhwvwofo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kpnhwvwofo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kpnhwvwofo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kpnhwvwofo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kpnhwvwofo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kpnhwvwofo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kpnhwvwofo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kpnhwvwofo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kpnhwvwofo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kpnhwvwofo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kpnhwvwofo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kpnhwvwofo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kpnhwvwofo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kpnhwvwofo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kpnhwvwofo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpnhwvwofo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kpnhwvwofo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kpnhwvwofo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kpnhwvwofo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpnhwvwofo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kpnhwvwofo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpnhwvwofo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kpnhwvwofo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpnhwvwofo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kpnhwvwofo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kpnhwvwofo .gt_left {
+  text-align: left;
+}
+
+#kpnhwvwofo .gt_center {
+  text-align: center;
+}
+
+#kpnhwvwofo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kpnhwvwofo .gt_font_normal {
+  font-weight: normal;
+}
+
+#kpnhwvwofo .gt_font_bold {
+  font-weight: bold;
+}
+
+#kpnhwvwofo .gt_font_italic {
+  font-style: italic;
+}
+
+#kpnhwvwofo .gt_super {
+  font-size: 65%;
+}
+
+#kpnhwvwofo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kpnhwvwofo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kpnhwvwofo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kpnhwvwofo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kpnhwvwofo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kpnhwvwofo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kpnhwvwofo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kpnhwvwofo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kpnhwvwofo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="walk_id" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">walk_id</th>
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">value</th>
+<th id="expression" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">expression</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">NA</td>
+<td class="gt_row gt_left" headers="name">column_names_as_expected</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "distance_km", "duration_min", "squirrels_spotted")</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_unique(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_unique(walk_id)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">NA</td>
+<td class="gt_row gt_left" headers="name">is_complete_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_complete(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">5</td>
+<td class="gt_row gt_left" headers="name">realistic_distance</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">3</td>
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">7</td>
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">3</td>
+<td class="gt_row gt_left" headers="name">realistic_speed</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km/duration_min * 60 &lt; 15</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>validation <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">==</span> <span class="cn">FALSE</span> <span class="sc">|</span> <span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(value) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojtfsftrpn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ojtfsftrpn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ojtfsftrpn thead, #ojtfsftrpn tbody, #ojtfsftrpn tfoot, #ojtfsftrpn tr, #ojtfsftrpn td, #ojtfsftrpn th {
+  border-style: none;
+}
+
+#ojtfsftrpn p {
+  margin: 0;
+  padding: 0;
+}
+
+#ojtfsftrpn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ojtfsftrpn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ojtfsftrpn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ojtfsftrpn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ojtfsftrpn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ojtfsftrpn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ojtfsftrpn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ojtfsftrpn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ojtfsftrpn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ojtfsftrpn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ojtfsftrpn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ojtfsftrpn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ojtfsftrpn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ojtfsftrpn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ojtfsftrpn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojtfsftrpn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ojtfsftrpn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ojtfsftrpn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ojtfsftrpn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojtfsftrpn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ojtfsftrpn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojtfsftrpn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ojtfsftrpn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojtfsftrpn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ojtfsftrpn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojtfsftrpn .gt_left {
+  text-align: left;
+}
+
+#ojtfsftrpn .gt_center {
+  text-align: center;
+}
+
+#ojtfsftrpn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ojtfsftrpn .gt_font_normal {
+  font-weight: normal;
+}
+
+#ojtfsftrpn .gt_font_bold {
+  font-weight: bold;
+}
+
+#ojtfsftrpn .gt_font_italic {
+  font-style: italic;
+}
+
+#ojtfsftrpn .gt_super {
+  font-size: 65%;
+}
+
+#ojtfsftrpn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ojtfsftrpn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ojtfsftrpn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ojtfsftrpn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ojtfsftrpn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ojtfsftrpn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ojtfsftrpn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ojtfsftrpn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ojtfsftrpn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="walk_id" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">walk_id</th>
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">value</th>
+<th id="expression" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">expression</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">NA</td>
+<td class="gt_row gt_left" headers="name">column_names_as_expected</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">names(.) == c("walk_id", "dog_name", "dog_breed", "walker", "date_of_walk", "distance_km", "duration_min", "squirrels_spotted")</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_unique(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">11</td>
+<td class="gt_row gt_left" headers="name">is_unique_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_unique(walk_id)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">NA</td>
+<td class="gt_row gt_left" headers="name">is_complete_id</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">is_complete(walk_id)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">5</td>
+<td class="gt_row gt_left" headers="name">realistic_distance</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">3</td>
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">7</td>
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">3</td>
+<td class="gt_row gt_left" headers="name">realistic_speed</td>
+<td class="gt_row gt_center" headers="value">FALSE</td>
+<td class="gt_row gt_left" headers="expression">distance_km/duration_min * 60 &lt; 15</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">6</td>
+<td class="gt_row gt_left" headers="name">realistic_duration</td>
+<td class="gt_row gt_center" headers="value">NA</td>
+<td class="gt_row gt_left" headers="expression">duration_min - 0 &gt;= -1e-08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="walk_id">10</td>
+<td class="gt_row gt_left" headers="name">realistic_squirrels</td>
+<td class="gt_row gt_center" headers="value">NA</td>
+<td class="gt_row gt_left" headers="expression">in_range(squirrels_spotted, min = 0, max = 10)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="walk_id">6</td>
+<td class="gt_row gt_left" headers="name">realistic_speed</td>
+<td class="gt_row gt_center" headers="value">NA</td>
+<td class="gt_row gt_left" headers="expression">distance_km/duration_min * 60 &lt; 15</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Validation is now complete, but at this point only R users can see the results.</p>
+<p>The next step is to turn these results into clear, practical feedback to help data providers resolve any issues.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -887,7 +3496,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./summary.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
